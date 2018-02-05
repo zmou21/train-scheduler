@@ -1,0 +1,40 @@
+/*train schedule styling */
+
+body {
+	background-color: #eee;
+}
+
+thead {
+	background-color: lightsteelblue;
+	text-align: center;
+}
+
+tbody {
+	text-align: center;
+}
+
+
+.container-fluid {
+	background-color: lightsteelblue;
+}
+
+.header {
+	text-align: center;
+	position: relative;
+	left: 38%;
+}
+
+.table-big {
+	margin: 1%;
+}
+
+.form {
+	border-top: 1px solid #777;
+	padding: 1% 0;
+}
+
+/*label {
+	border-bottom: 1px solid #777;
+	/*border-left: 1px solid #777;*/
+}
+	
