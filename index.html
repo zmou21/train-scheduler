@@ -18,13 +18,17 @@
 	</head>
 	<body>
 
+		<div class="container-fluid">
+			<div class="row">
+				<h1 class="header">Train Schedule</h1>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="display-3">Train Schedule</h1>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row table-big">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	                <table class="table table-hover"  id="train-table">
 	                  <thead>
@@ -41,26 +45,29 @@
 	                </table>					
 				</div>	
 			</div>
-			<div class="row">
-            	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form">
+			<div class="row form">
+            	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	                <form id="my-form">
-	                  <div class="form-group">
-	                    <label>Train Name</label>
-	                    <input type="text" class="form-control" id="train-name" placeholder="Enter Your Name">
-	                  </div>
-	                  <div class="form-group">
-	                    <label>Destination</label>
-	                    <input type="text" class="form-control" id="destination" placeholder="What is your role?">
-	                  </div>
-	                  <div class="form-group">
-	                    <label>First Train Time (HH:mm -military time)</label>
-	                    <input type="text" class="form-control" id="first-train" placeholder="What is your start date?">
-	                  </div>
-	                  <div class="form-group">
-	                    <label>Frequency (min)</label>
-	                    <input type="text" class="form-control" id="frequency" placeholder="What is the frequency?"id="rateForm">
-	                  </div>
-	                  <button type="submit" id="form-submit" class="btn btn-primary">Submit</button>
+	                	<div>
+	                		<h2>Enter</h2>
+	                	</div>
+						<div class="form-group">
+							<label class="label label-info">Train Name</label>
+							<input type="text" class="form-control" id="train-name" placeholder="Enter Your Name">
+						</div>
+						<div class="form-group">
+							<label>Destination</label>
+							<input type="text" class="form-control" id="destination" placeholder="What is your role?">
+						</div>
+						<div class="form-group">
+							<label>First Train Time (HH:mm -military time)</label>
+							<input type="text" class="form-control" id="first-train" placeholder="What is your start date?">
+						</div>
+						<div class="form-group">
+							<label>Frequency (min)</label>
+							<input type="text" class="form-control" id="frequency" placeholder="What is the frequency?"id="rateForm">
+						</div>
+							<button type="submit" id="form-submit" class="btn btn-primary">Submit</button>
 	                </form>
             	</div>			
 			</div>
