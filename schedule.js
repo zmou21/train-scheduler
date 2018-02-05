@@ -49,7 +49,7 @@ $(document).ready(function() {
 		console.log(nextArrival);
 
 		$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + " min" + "</td><td>" +
-		nextArrival + "</td><td>" + minutesNextTrain + "</td></tr>");
+		nextArrival + "</td><td>" + minutesNextTrain + " min" + "</td></tr>");
 
 
 	});
