@@ -16,12 +16,13 @@ tbody {
 
 .container-fluid {
 	background-color: lightsteelblue;
+	width: 100%;
 }
 
 .header {
 	text-align: center;
 	position: relative;
-	left: 43%;
+	left: 13%;
 }
 
 .table-big {
