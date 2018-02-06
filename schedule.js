@@ -84,4 +84,26 @@ $(document).ready(function() {
 
 	});
 
+	// $("#log-out").on("click", function(error) {
+	// 	firebase.auth().signOut();
+	// 	console.log(error.message)
+
+	// });
+
+	logout.addEventListener("click", error => {
+		firebase.auth().signOut();
+		console.log(error.message);
+	});
+
+	// firebase.auth().signOut().then(function() {
+
+	// 		console.log("You signed out");
+	// 		window.location = "login.html";
+	// 	}, function(error) {
+	// 		console.log("Error");
+	// 	}
+
+	// });
+
+
 });
