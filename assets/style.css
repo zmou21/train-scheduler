@@ -51,8 +51,22 @@ tbody {
 	padding: 1% 0;
 }
 
-/*label {
-	border-bottom: 1px solid #777;
-	/*border-left: 1px solid #777;*/
+#logout {
+	position: relative;
+	top: 20%;
 }
-	
+
+
+/*login page*/
+
+.box {
+	border: 1px solid grey;
+	border-top: 25px solid lightsteelblue;
+	padding: 1%;
+	margin: 5%;
+	width: 75%;
+}
+
+.signup-buttons {
+	margin: 0 1.25%;
+}
