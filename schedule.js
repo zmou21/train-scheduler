@@ -45,7 +45,7 @@ $(document).ready(function() {
 		var minutesNextTrain = frequency - remainderTime;
 		console.log(minutesNextTrain);
 
-		var nextArrival = moment().add(minutesNextTrain, "m");
+		var nextArrival = moment().add(minutesNextTrain, "m").format("hh:mm");
 		console.log(nextArrival);
 
 		$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + " min" + "</td><td>" +
@@ -60,7 +60,7 @@ $(document).ready(function() {
 		event.preventDefault(); //prevents reload of page when submit button pressed
 
 		trainName = $("#train-name").val().trim();
-		firstTrain = moment($("#first-train").val().trim(), "HH:mm").format("HH:mm"); //moment.js here
+		firstTrain = moment($("#first-train").val().trim(), "HH:mm").format("X"); //moment.js here
 		destination = $("#destination").val().trim();
 		frequency = parseInt($("#frequency").val().trim());
 
