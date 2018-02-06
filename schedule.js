@@ -84,26 +84,41 @@ $(document).ready(function() {
 
 	});
 
-	// $("#log-out").on("click", function(error) {
+
+	// var user = firebase.auth().currentUser;
+
+	// console.log(user);
+
+	// if (user) {
+
+		$("#logout").on("click", function() {
+
+			firebase.auth().signOut().then(function() {
+		  		console.log("signed out");
+		  		window.location = "login.html";
+			}).catch(function(error) {
+			  console.log("nope")
+			});
+		});
+
+
+	// };
+
+	// logout.addEventListener("click", error => {
 	// 	firebase.auth().signOut();
-	// 	console.log(error.message)
-
+	// 	console.log(error.message);
 	// });
 
-	logout.addEventListener("click", error => {
-		firebase.auth().signOut();
-		console.log(error.message);
-	});
+	// firebase.auth().onAuthStateChanged(firebaseUser => {
 
-	// firebase.auth().signOut().then(function() {
-
-	// 		console.log("You signed out");
-	// 		window.location = "login.html";
-	// 	}, function(error) {
-	// 		console.log("Error");
-	// 	}
+	// if (firebaseUser) {
+	// 	console.log(firebaseUser);
+	// 	window.location = "index.html";
+	// }
+	// else {
+	// 	console.log("Not logged in");
+	// }
 
 	// });
-
 
 });
