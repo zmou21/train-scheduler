@@ -1,124 +1,129 @@
-//train scheduler
+  //train scheduler
 
 
-var config = {
-    apiKey: "AIzaSyCI-yqLxkI2DeawNekc-PTso9H7mBL-e1I",
-    authDomain: "train-schedule-7c96a.firebaseapp.com",
-    databaseURL: "https://train-schedule-7c96a.firebaseio.com",
-    projectId: "train-schedule-7c96a",
-    storageBucket: "train-schedule-7c96a.appspot.com",
-    messagingSenderId: "884218061813"
-  };
-  firebase.initializeApp(config);
+  var config = {
+      apiKey: "AIzaSyCI-yqLxkI2DeawNekc-PTso9H7mBL-e1I",
+      authDomain: "train-schedule-7c96a.firebaseapp.com",
+      databaseURL: "https://train-schedule-7c96a.firebaseio.com",
+      projectId: "train-schedule-7c96a",
+      storageBucket: "train-schedule-7c96a.appspot.com",
+      messagingSenderId: "884218061813"
+    };
+    firebase.initializeApp(config);
 
-var database = firebase.database();
+  var database = firebase.database();
 
-$(document).ready(function() {
+  $(document).ready(function() {
 
-	var frequency;
-	var trainName;
-	var firstTrain;
-	var trainTime;
-	var minutesAway;
-	var destination;
+  	var frequency;
+  	var trainName;
+  	var firstTrain;
+  	var trainTime;
+  	var minutesAway;
+  	var destination;
 
-	//pushs database values into Firebase
+    //on-click event for submit button
+  	$("#form-submit").on("click", function(event) {
 
-	database.ref().on("child_added", function(snapshot) {
+  		event.preventDefault(); //prevents reload of page when submit button pressed
 
-		var frequency = snapshot.val().frequency;
-		var trainName = snapshot.val().name;
-		var firstTrain = snapshot.val().first;
-		var destination = snapshot.val().destination;
+  		trainName = $("#train-name").val().trim();
+  		firstTrain = $("#first-train").val().trim(); //moment.js here
+  		destination = $("#destination").val().trim();
+  		frequency = parseInt($("#frequency").val().trim());
 
-		var firstTimeConverted = moment(firstTrain, "hh:mm").subtract(0, "years");
+  		database.ref().push({
+  			name: trainName,
+  			first: firstTrain,
+  			destination: destination,
+  			frequency: frequency
+  		});
 
-		var currentTime = moment();
-		console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+  		// console.log(trainName);
+  		// console.log(firstTrain);
+  		// console.log(destination);
+  		// console.log("this is the frequency" + frequency);
 
-		var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-		console.log("DIFFERENCE IN TIME: " + diffTime);
+  		//clear text boxes
+  		$("#train-name").val("");
+  		$("#first-train").val("");
+  		$("#destination").val("");
+  		$("#frequency").val("");
 
-		var remainderTime = diffTime % frequency;
-		console.log(remainderTime);
-
-		var minutesNextTrain = frequency - remainderTime;
-		console.log(minutesNextTrain);
-
-		var nextArrival = moment().add(minutesNextTrain, "m").format("hh:mm");
-		console.log(nextArrival);
-
-		$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + " min" + "</td><td>" +
-		nextArrival + "</td><td>" + minutesNextTrain + " min" + "</td></tr>");
-
-
-	});
-
-	//on-click event for submit button
-	$("#form-submit").on("click", function(event) {
-
-		event.preventDefault(); //prevents reload of page when submit button pressed
-
-		trainName = $("#train-name").val().trim();
-		firstTrain = moment($("#first-train").val().trim(), "HH:mm").format("X"); //moment.js here
-		destination = $("#destination").val().trim();
-		frequency = parseInt($("#frequency").val().trim());
-
-		database.ref().push({
-			name: trainName,
-			first: firstTrain,
-			destination: destination,
-			frequency: frequency
-		});
-
-		// console.log(trainName);
-		// console.log(firstTrain);
-		// console.log(destination);
-		// console.log("this is the frequency" + frequency);
-
-		//clear text boxes 
-		$("#train-name").val("");
-		$("#first-train").val("");
-		$("#destination").val("");
-		$("#frequency").val("");
-
-	});
+  	});
 
 
-	// var user = firebase.auth().currentUser;
+  	//pushs database values into Firebase
 
-	// console.log(user);
+  	database.ref().on("child_added", function(snapshot, prevChildKey) {
 
-	// if (user) {
+  		var frequency = snapshot.val().frequency;
+  		var trainName = snapshot.val().name;
+  		var firstTrain = snapshot.val().first;
+  		var destination = snapshot.val().destination;
 
-		$("#logout").on("click", function() {
+      var timeLog = firstTrain.split(":");
 
-			firebase.auth().signOut().then(function() {
-		  		console.log("signed out");
-		  		window.location = "login.html";
-			}).catch(function(error) {
-			  console.log("nope")
-			});
-		});
+      var train = moment().hours(timeLog[0]).minutes(timeLog[1]);
+
+      // var maxMoment = moment.max(Moment(), train);
+      //
+      // if(maxMoment === train) {
+      //
+      // }
+
+  		//var firstTimeConverted = moment(firstTrain, "hh:mm").subtract(0, "years");
+
+  		var currentTime = moment();
+  		console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+  		var diffTime = moment().diff(train, "minutes");
+  		console.log("DIFFERENCE IN TIME: " + diffTime);
+
+  		var remainderTime = diffTime % frequency;
+  		console.log(remainderTime);
+
+  		var minutesNextTrain = frequency - remainderTime;
+  		console.log(minutesNextTrain);
+
+  		var nextArrival = moment().add(minutesNextTrain, "m").format("hh:mm A");
+  		console.log(nextArrival);
+
+  		$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + " min" + "</td><td>" +
+  		nextArrival + "</td><td>" + minutesNextTrain + " min" + "</td></tr>");
 
 
-	// };
+  	});
 
-	// logout.addEventListener("click", error => {
-	// 	firebase.auth().signOut();
-	// 	console.log(error.message);
-	// });
 
-	// firebase.auth().onAuthStateChanged(firebaseUser => {
+  		$("#logout").on("click", function() {
 
-	// if (firebaseUser) {
-	// 	console.log(firebaseUser);
-	// 	window.location = "index.html";
-	// }
-	// else {
-	// 	console.log("Not logged in");
-	// }
+  			firebase.auth().signOut().then(function() {
+  		  		console.log("signed out");
+  		  		window.location = "login.html";
+  			}).catch(function(error) {
+  			  console.log(error);
+  			});
+  		});
 
-	// });
 
-});
+  	// };
+
+  	// logout.addEventListener("click", error => {
+  	// 	firebase.auth().signOut();
+  	// 	console.log(error.message);
+  	// });
+
+  	// firebase.auth().onAuthStateChanged(firebaseUser => {
+
+  	// if (firebaseUser) {
+  	// 	console.log(firebaseUser);
+  	// 	window.location = "index.html";
+  	// }
+  	// else {
+  	// 	console.log("Not logged in");
+  	// }
+
+  	// });
+
+  });
