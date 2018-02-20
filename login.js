@@ -31,6 +31,8 @@ signup.addEventListener("click", error => {
 
 
 login.addEventListener("click", error => {
+
+	error.preventDefault();
 	  var email = document.getElementById("email").value;
 	  var password =  document.getElementById("password").value;
 	  var auth = firebase.auth();
